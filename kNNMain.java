@@ -27,8 +27,8 @@ public class kNNMain{
 	
 
     // TASK 2:Use the DataSet class to split the fullDataSet into Training and Held Out Test Dataset
-	List<DataPoint> HeldOut = DataSet.getTestSet(Iris1, 0.8);
-	List<DataPoint> Training = DataSet.getTrainingSet(Iris1, 0.2);
+	List<DataPoint> Insurance = DataSet.getTestSet(Iris1, 0.2);
+	List<DataPoint> Train = DataSet.getTrainingSet(Iris1, 0.8);
     // TASK 3: Use the DataSet class methods to plot the 2D data (binary and multi-class)
 
 	//REMOVED
@@ -40,8 +40,14 @@ public class kNNMain{
 
     // TASK 5: Use the KNNClassifier class to determine the k nearest neighbors to a given DataPoint,
     // and make a print a predicted target label
-
-	DataPoint IrisA = Iris1.get(0);
+	
+	
+	KNNClassifier thingToFind = new KNNClassifier (5);
+	
+	
+	
+	
+	/*DataPoint IrisA = Iris1.get(0);
 	double [] valuesA = IrisA.getX();
 	for(int i=1; i< values.length; i ++)
 	{
@@ -54,12 +60,22 @@ public class kNNMain{
 		System.out.println( + valuesB[i]);
 	}
 	double distance = DataSet.distanceEuclid(IrisA,IrisB);
-	System.out.println(distance);
+	System.out.println(distance);*/
 
     // TASK 6: loop over the datapoints in the held out test set, and make predictions for Each
     // point based on nearest neighbors in training set. Calculate accuracy of model.
-
-
+	int ctr = 0;
+	for (int i = 0; i < Insurance.size(); i ++)
+	{
+		String predictedThingy = thingToFind.predict( Train, Insurance.get(i));
+		if(predictedThingy .equals (Insurance.get(i).getLabel()))
+		{
+			ctr++; 
+		}
+		System.out.println( predictedThingy);
+	}
+	double persentage = (double)(ctr)/(double)(Insurance.size()) * 100;
+	System.out.println(persentage);
   }
 
 }
